@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>TTN Dashboard - v0.2</title>
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" href="/assets/css/style.css">
+
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous">
+    </script>
+    <script src="/assets/js/raphael-2.1.4.min.js"></script>
+    <script src="/assets/js/justgage.js"></script>
+<script>
+    var socket = null;
+
+    $(document).ready(function(){
+        var dflt = {
+            donut: false,
+            gaugeWidthScale: 0.6,
+            counter: true,
+            hideInnerShadow: true
+        }
+
+        var gaugeAvgTemp = new JustGage({
+            id: 'gaugeAvgTemp',
+            min: 0,
+            max: 50,
+            value: 0,
+            title: 'Temperature',
+            defaults: dflt
+        });
+
+        var gaugeAvgPressure = new JustGage({
+            id: 'gaugeAvgPressure',
+            min: 970,
+            max: 1040,
+            value: 0,
+            title: 'Pressure',
+            defaults: dflt
+        });
+
+        socket = io('http://172.24.100.10:3000');
+
+        socket.on('messages', function (data) {
+            $('.messages').append(data.message + '<br>');
+        });
+
+        socket.on('nodeData', function (data) {
+            $('.data').append('Temperature is ' + data.payload.celcius + 'C and air pressure is ' + data.payload.mbar +'mbar.<br>');
+            gaugeAvgTemp.refresh(data.payload.celcius);
+            gaugeAvgPressure.refresh(data.payload.mbar);
+        });
+
+    });
+
+    function sendData() {
+        socket.emit('clientData', {clientData: 'Client button clicked, do something ...'});
+    };
+</script>
+</head>
+
+<body>
+    <h1>TTN Dashboard - TF1</h1>
+    <h2>Graphical</h2>
+    <div class="container">
+        <div id="gaugeAvgTemp" class="gauge"></div>
+        <div id="gaugeAvgPressure" class="gauge"></div>
+    </div>
+    <div>
+        <button onclick="sendData();">Send data to node</button>
+    </div>
+    <hr>
+    <h3>Data</h3>
+    <div class="data"></div>
+    <hr>
+    <h3>Messages</h3>
+    <div class="messages"></div>
+    <hr>
+</body>
+</html>

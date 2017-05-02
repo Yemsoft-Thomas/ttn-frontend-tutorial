@@ -1,0 +1,26 @@
+body {
+    background-color: lightgrey;
+    font-family: Arial;
+    color: grey;
+    text-align: center;
+}
+
+button {
+    color: white;
+    font-size: larger;
+    background-color: darkgrey;
+    padding: 1em;
+    border: none;
+}
+
+.container {
+    width: 800px;
+    margin: 100px auto;
+    text-align: center;
+}
+
+.gauge {
+    width: 300px;
+    height: 250px;
+    display: inline-block;
+}
