@@ -2,7 +2,7 @@
  Webserver for the static client files
  Plus websocket server to handle all data requests
  Data comes from our RethinkDB.
- Yemsoft, TF, 14-04-2017, v0.1
+ Yemsoft, TF, 14-04-2017, v0.2
  */
 
 var express = require('express'), http = require('http');
@@ -13,7 +13,7 @@ var io = require('socket.io').listen(server);
 var fs = require('fs');
 var r = require('rethinkdb');
 
-var dbHost = '172.24.100.10';
+var dbHost = 'localhost';
 
 var globalSocket = null;
 var updates = 1;

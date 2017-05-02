@@ -3,7 +3,7 @@ var fs = require('fs');
 var r = require('rethinkdb');
 
 //Connect to rethink database where we store the incoming messages from our nodes
-r.connect({ host: '172.24.100.10', port: 28015 }, function(err, conn) {
+r.connect({ host: 'localhost', port: 28015 }, function(err, conn) {
   if(err) throw err;
   //Create tables to store up stream messages and logging.
   var tabs = r.db('ttn').tableList().run(conn, function(err, res) {

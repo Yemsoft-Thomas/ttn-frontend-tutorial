@@ -1,11 +1,11 @@
 {
-  "name": "ttn-app-tf1",
-  "version": "0.1.0",
+  "name": "ttn-frontend-tutorial",
+  "version": "0.2.0",
   "description": "The Things Network - simple front-end application, for tutorial. ",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Thomas Falken",
-  "license": "ISC"
+  "license": "MIT"
 }

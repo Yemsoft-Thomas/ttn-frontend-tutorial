@@ -1,7 +1,7 @@
 /**
  * Created by thomas on 14-4-17.
  */
-console.log('Starting TTN App TF1 ...');
+console.log('Starting TTN App TTN Front-end Tutorial ...');
 
 //Read incoming Node data via MQTT from The Things Network and store in RethinkDB
 require('./getNodeDataInDB.js');
