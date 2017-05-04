@@ -2,10 +2,16 @@
   "name": "ttn-frontend-tutorial",
   "version": "0.2.0",
   "description": "The Things Network - simple front-end application, for tutorial. ",
+  "dependencies": {
+    "express": "^4.15.0",
+    "rethinkdb": "^2.3.0",
+    "socket.io": "^1.7.0",
+    "ttn": "^2.1.0"
+  },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Thomas Falken",
+  "author": "Thomas Falken, Yemsoft",
   "license": "MIT"
 }
