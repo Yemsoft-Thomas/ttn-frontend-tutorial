@@ -5,6 +5,11 @@ var r = require('rethinkdb');
 //Connect to rethink database where we store the incoming messages from our nodes
 r.connect({ host: 'localhost', port: 28015 }, function(err, conn) {
   if(err) throw err;
+  //Check if DB already exists, else create it
+  var dbs = r.dbList().run(conn , function(err, res) {
+    if (!(res.includes('ttn'))) r.dbCreate('ttn').run(conn);
+  });
+
   //Create tables to store up stream messages and logging.
   var tabs = r.db('ttn').tableList().run(conn, function(err, res) {
     if(err) throw err;
