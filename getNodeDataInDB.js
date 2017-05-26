@@ -20,9 +20,9 @@ r.connect({ host: 'localhost', port: 28015 }, function(err, conn) {
   r.db('ttn').table('node_log').insert({info:'New session started.'}).run(conn);
 
   //Open the MQTT connection to TTN and our application
-  var region = 'eu';
-  var appId = 'tfnode01';
-  var accessKey = 'ttn-account-v2.xE11a2iy8bbDTjv3Hc3XBs-fhE76eXfD7GTU2mnPskE';
+  var region = 'eu';  //Change to your region
+  var appId = 'AppName';  //change to your application Id
+  var accessKey = 'ttn-account-v2.x........s-f..............E';  //Enter your own access key here
   var options = {
     protocol: 'mqtts',
     // Assuming that the mqtt-ca certificate (https://www.thethingsnetwork.org/docs/applications/mqtt/quick-start.html) is in the same folder

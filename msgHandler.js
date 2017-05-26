@@ -27,9 +27,14 @@ server.listen(3000, function () {
 
 //Whenever a browser connects to websocket we want to provide it with the existing payload averages
 function getNodeData(dbConn) {
+  //Filter query to display only today's data, using a string match (similar to SQL like),
+  //since our sensor data's timestamp is stored as string.
+  //TODO: Here lies a challenge for improvement ;)
+  var d = new Date();
+  var dateString = d.getDate() + '-' + (d.getMonth()+1) + '-' + d.getFullYear();   //Month are returned 0-11!
   //only if a socket exists to send the result with
   if (globalSocket != null) {
-    r.db('ttn').table('up_data').run(dbConn, function(err, cursor) {
+    r.db('ttn').table('up_data').filter(r.row('metadata')('time').match(dateString)).run(dbConn, function(err, cursor) {
         if (err) throw err;
 
         //calculate the average of the payload data
@@ -78,7 +83,7 @@ function subscribeChanges(dbConn) {
 
 //Browser / client can send data via websocket back to here for server processing
 function processClientData(data) {
-  //TODO something usefull should go here, for example send data down to node
+  //TODO something usefull should go here, for example send data down to node and blink it's LED
   console.log('Received from client: ' + JSON.stringify(data, null, 2));
   globalSocket.emit('messages', { message: 'Thank you for the client data.' });
 }
